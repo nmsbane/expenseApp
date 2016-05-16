@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load bootstrap_tags %}
+{% block title %}Add bank account form{% endblock title %}
+
+{% block content %}
+    <h1>Add a bank account</h1>
+      <form class="form-horizontal" method="post" action=".">
+        {% csrf_token %}
+        {{ form|as_bootstrap_horizontal }}
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <a href="#back" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-primary"> Add bank account
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
