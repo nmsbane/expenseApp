@@ -26,4 +26,15 @@ class AddAccountForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['name', 'description', 'balance']
-        
+
+
+class AddBalanceForm(forms.Form):
+    # here we use a dummy `queryset`, because ModelChoiceField
+    # requires some queryset
+    account_field = forms.ModelChoiceField(queryset=User.objects.none())
+    amount = forms.IntegerField()
+
+    def __init__(self, user):
+        super(AddBalanceForm, self).__init__()
+        self.fields['account_field'].queryset = user.accounts.all()
+    

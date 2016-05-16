@@ -3,9 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 #from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, UserRegistrationForm, AddAccountForm
+from .forms import LoginForm, UserRegistrationForm, AddAccountForm, AddBalanceForm
 from django.contrib.auth.views import login
-
+from .models import Account
 
 def custom_login(request):
     if request.user.is_authenticated():
@@ -47,5 +47,21 @@ def add_account(request):
     else:
         add_account_form = AddAccountForm()
     return render(request, 'account/add_account.html', {'form': add_account_form})
+    
+@login_required
+def add_balance(request):
+    if request.method == 'POST':
+        account_field = int(request.POST.get('account_field'))
+        balance_to_add = int(request.POST.get('amount'))
+        account_object = Account.objects.get(id=account_field)
+        account_object.balance = account_object.balance + balance_to_add
+        account_object.save()
+        return HttpResponseRedirect(reverse('dashboard'))
+            
+    else:
+        add_balance_form = AddBalanceForm(request.user)
+    return render(request, 'account/add_balance.html', {'form': add_balance_form})
+
+        
     
     
