@@ -11,6 +11,9 @@
             Please try again.
         </p>
     {% endif %}
+    <p>Please use the following form to login. If you don't have account
+      <a href="{% url 'register' %}">Register here</a>
+    </p>
       <form class="form-horizontal" method="post" action=".">
         {% csrf_token %}
         {{ form|as_bootstrap_horizontal }}
