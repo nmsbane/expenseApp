@@ -28,9 +28,10 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             {% if request.user.is_authenticated %}
-                <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
-                <li {% if section == "add_accounts" %}class="selected"{% endif %}><a href="{% url "add_account" %}">Add accounts</a></li>
-                <li {% if section == "people" %}class="selected"{% endif %}><a href="{% url "add_balance" %}">Add balance</a></li>
+                <li {% if section == "dashboard" %}class="active"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
+                <li {% if section == "add_accounts" %}class="active"{% endif %}><a href="{% url "add_account" %}">Add accounts</a></li>
+                <li {% if section == "balance" %}class="active"{% endif %}><a href="{% url "add_balance" %}">Add balance</a></li>
+                <li {% if section == "tag" %}class="active"{% endif %}><a href="{% url "add_tag" %}">Add Tag</a></li>
             {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">

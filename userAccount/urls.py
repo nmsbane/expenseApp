@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     url(r'^addAccount/$', views.add_account, name='add_account'),
     url(r'^addBalance/$', views.add_balance, name='add_balance'),
-    
+    url(r'^addTag/$', views.add_tag, name='add_tag'),
     url(r'^$', views.dashboard, name='dashboard'),
 ]
 

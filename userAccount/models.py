@@ -10,4 +10,13 @@ class Account(models.Model):
     
     def __unicode__(self):
         return "{0}".format(self.name)
+        
+# A user can have and can create multiple tags
+
+class Tags(models.Model):
+    user = models.ForeignKey(User, related_name='tags')
+    tag_name = models.CharField(max_length=15)
+    
+    def __unicode__(self):
+        return "{0}".format(self.tag_name)
     

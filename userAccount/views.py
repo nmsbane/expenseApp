@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 #from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, UserRegistrationForm, AddAccountForm, AddBalanceForm
+from .forms import LoginForm, UserRegistrationForm, AddAccountForm, AddBalanceForm, AddTagForm
 from django.contrib.auth.views import login
 from .models import Account
 
@@ -61,6 +61,20 @@ def add_balance(request):
     else:
         add_balance_form = AddBalanceForm(request.user)
     return render(request, 'account/add_balance.html', {'form': add_balance_form})
+    
+@login_required
+def add_tag(request):
+    if request.method == 'POST':
+        tag_form = AddTagForm(request.POST)
+        if tag_form.is_valid():
+            # create a new tag and attach the current user to it.
+            tag_object = tag_form.save(commit=False)
+            tag_object.user = request.user
+            tag_object.save()
+            return HttpResponseRedirect(reverse('dashboard'))
+    else:
+        tag_form = AddTagForm()
+    return render(request, 'account/add_tag.html', {'form': tag_form, 'section': 'tag'})
 
         
     

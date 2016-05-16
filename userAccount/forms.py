@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Account
+from .models import Account, Tags
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -37,4 +37,9 @@ class AddBalanceForm(forms.Form):
     def __init__(self, user):
         super(AddBalanceForm, self).__init__()
         self.fields['account_field'].queryset = user.accounts.all()
+        
+class AddTagForm(forms.ModelForm):
+    class Meta:
+        model = Tags
+        fields = ['tag_name']
     
